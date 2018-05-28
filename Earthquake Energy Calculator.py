@@ -1,7 +1,14 @@
 import math
+import sys
 
 
-richter_s = (input("Please enter ritcher scale to calculate energy: "))
+richter_s = input("Please enter ritcher scale to calculate energy: ")
+
+if richter_s.isdigit() is False:
+      print("Please enter only float type of input")
+      sys.exit()
+
+
 
 richter_s = float(richter_s)
 
