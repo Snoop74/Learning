@@ -1,0 +1,51 @@
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+import datetime
+import time
+import csv
+import matplotlib.pyplot as plt
+
+liste = []
+
+sıra = []
+
+
+
+for i in range(0,10):
+
+  url ='http://www.bloomberght.com/'
+
+  sorgu = urlopen(url)
+
+  soup = BeautifulSoup(sorgu, 'html.parser')
+
+  isim = soup.find_all('span', attrs={'data-secid':'USDTRY Curncy'})
+
+  dolar = isim[0].text
+
+  print(type(dolar))
+
+  liste.append(dolar)
+
+  dolar = str(dolar)
+
+  timess = time.strftime("%Y/%m/%d %H:%M")
+
+  sıra.append(i)
+  
+  print(dolar)
+
+  dosya = open('dolartext.txt', 'a')
+  dosya.write("\n" + timess + "--" + dolar)
+  time.sleep(5)
+
+print(liste)
+
+
+
+plt.xlabel("Sıra")
+plt.ylabel("$/TL")
+plt.title("Kur Grafiği")
+plt.plot(sıra, liste, label = "Dolar/TL")
+
+plt.show()
